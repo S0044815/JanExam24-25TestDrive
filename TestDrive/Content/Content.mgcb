@@ -92,3 +92,10 @@
 /processorParam:Quality=Best
 /build:Assets/Success.mp3
 
+#begin font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:font.spritefont
+
