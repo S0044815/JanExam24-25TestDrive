@@ -22,7 +22,7 @@ namespace TestDrive
             // TODO: Add your initialization logic here
             ActivityAPIClient.Track(StudentID: "S00244815",
                StudentName: "Ihor Utochkin",
-               activityName: "GP01 Final Exam 2024", Task: "Exam Started");
+               activityName: "GP01 Final Exam 2024", Task: "Q1");
             base.Initialize();
         }
 
