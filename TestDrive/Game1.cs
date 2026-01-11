@@ -22,6 +22,8 @@ namespace TestDrive
         private Texture2D _openingScreen;
         private SpriteFont _largeFont;
         private Song _openingMusic;
+        private Texture2D _background;
+        private Song _playMusic;
 
         private KeyboardState _previousKeyboard; // Why previousKeyboard? So Enter triggers once when you press it, not every frame while you hold it.
 
@@ -38,7 +40,7 @@ namespace TestDrive
                 StudentID: "S00244815",
                 StudentName: "Ihor Utochkin",
                 activityName: "GP01 Final Exam 2024",
-                Task: "Q1b Opening Screen"
+                Task: "Q1с Play Screen"
             );
 
             base.Initialize();
@@ -51,6 +53,8 @@ namespace TestDrive
             _openingScreen = Content.Load<Texture2D>("Assets/Opening Screen"); // Load the opening screen image
             _largeFont = Content.Load<SpriteFont>("Assets/Message"); // Load a large font for the message
             _openingMusic = Content.Load<Song>("Assets/Opening Music Track"); // Load the opening music track
+            _background = Content.Load<Texture2D>("Assets/background");
+            _playMusic = Content.Load<Song>("Assets/Play Track");
 
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(_openingMusic);
@@ -71,8 +75,13 @@ namespace TestDrive
                 if (enterPressedNow && enterWasUpBefore)
                 {
                     _currentState = GameState.Playing;
+                    Window.Title = "STATE = PLAYING";
+
                     MediaPlayer.Stop();
+
                     // gameplay starts now (we’ll do the play screen in Q1c)
+                    MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Play(_playMusic);
                 }
             }
 
@@ -103,6 +112,16 @@ namespace TestDrive
                 );
 
                 _spriteBatch.DrawString(_largeFont, text, pos, Color.Black);
+            }
+
+            if (_currentState == GameState.Playing)
+            {
+                _spriteBatch.Draw(
+                    _background,
+                    new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), //Should be (0, 0, 3000, 3000); but it is not working. 
+                    Color.White                                                                         //Keep it this way for now
+                );
+
             }
 
             _spriteBatch.End();
